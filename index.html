@@ -173,76 +173,48 @@
   .service-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
 
   /* ── PRICING ── */
-  .pricing-section { background: var(--cream); }
-  .pricing-toggle {
-    display: flex; gap: 0; margin-bottom: 48px;
-    border: 2px solid var(--burnt-orange); border-radius: 50px;
-    overflow: hidden; width: fit-content;
-  }
-  .toggle-btn {
-    padding: 10px 28px; font-size: 0.88rem; font-weight: 600;
-    border: none; cursor: pointer; transition: background 0.2s, color 0.2s;
-    background: transparent; color: var(--burnt-orange);
-  }
-  .toggle-btn.active { background: var(--burnt-orange); color: var(--white); }
+  
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2 class="section-title fade-up">Flexible packages for every need.</h2>
+  <p class="section-intro fade-up">Choose between KES or USD pricing. Monthly retainers are ideal for ongoing support; ad-hoc options are perfect for trials, one-off tasks, or busy seasons.</p>
 
-  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 60px; }
-  .price-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 20px; padding: 36px 28px;
-    display: flex; flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(196,80,10,0.13); }
-  .price-card.featured {
-    background: var(--burnt-orange); border-color: var(--burnt-orange); color: var(--white);
-  }
-  .price-card.featured .price-name,
-  .price-card.featured .price-amount,
-  .price-card.featured .price-period,
-  .price-card.featured .price-ideal { color: rgba(255,255,255,0.85); }
-  .price-card.featured .price-feature { color: rgba(255,255,255,0.9); }
-  .price-card.featured .price-feature::before { color: var(--yellow); }
-  .price-card.featured .btn-price { background: var(--white); color: var(--burnt-orange); }
-  .price-card.featured .btn-price:hover { background: var(--yellow); }
+  <div class="pricing-toggle" id="currencyToggle">
+    <button class="toggle-btn active" onclick="switchCurrency('kes', this)">KES</button>
+    <button class="toggle-btn" onclick="switchCurrency('usd', this)">USD</button>
+  </div>
 
-  .price-badge {
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; background: var(--yellow); color: var(--black);
-    border-radius: 4px; padding: 4px 10px; width: fit-content; margin-bottom: 16px;
-  }
-  .price-name { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 10px; }
-  .price-amount { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--black); line-height: 1; }
-  .price-period { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; }
-  .price-features { list-style: none; margin-bottom: 28px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-  .price-feature { font-size: 0.9rem; color: var(--text-body); }
-  .price-feature::before { content: "✓ "; color: var(--burnt-orange); font-weight: 700; }
-  .price-ideal { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 24px; font-style: italic; }
-  .btn-price {
-    display: block; text-align: center; text-decoration: none;
-    background: var(--burnt-orange); color: var(--white);
-    border-radius: 50px; padding: 13px 24px; font-weight: 600; font-size: 0.9rem;
-    transition: background 0.2s, transform 0.15s; border: none; cursor: pointer;
-  }
-  .btn-price:hover { background: var(--orange-mid); transform: translateY(-1px); }
-
-  /* adhoc pricing */
-  .adhoc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-  .adhoc-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
-    padding: 28px 24px; transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .adhoc-card:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(196,80,10,0.11); }
-  .adhoc-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-  .adhoc-card .price-amount { font-size: 1.9rem; margin-bottom: 4px; }
-  .adhoc-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
-
-  .pricing-note {
-    background: var(--yellow); color: var(--black);
-    border-radius: 14px; padding: 20px 28px;
-    font-size: 0.9rem; font-weight: 500; margin-top: 32px;
-    line-height: 1.6;
-  }
+  <!-- AD-HOC -->
+  <div style="margin-bottom: 16px;">
+    <div class="section-tag">Ad-Hoc & One-Off Options</div>
+  </div>
+  <div class="adhoc-grid">
+    <div class="adhoc-card fade-up">
+      <h3>Hourly (Ad-hoc)</h3>
+      <div class="price-amount kes-price">Ksh 800</div>
+      <div class="price-amount usd-price" style="display:none">$6</div>
+      <div class="price-period kes-price">– Ksh 1,500 / hour</div>
+      <div class="price-period usd-price" style="display:none">– $11 / hour</div>
+      <p>Flexible, as-needed support. Billed in minimum 2-hour blocks. Perfect for irregular tasks.</p>
+    </div>
+    <div class="adhoc-card fade-up">
+      <h3>Weekly Package</h3>
+      <div class="price-amount kes-price">Ksh 5,000</div>
+      <div class="price-amount usd-price" style="display:none">$38</div>
+      <div class="price-period kes-price">– Ksh 8,000 / week</div>
+      <div class="price-period usd-price" style="display:none">– $61 / week</div>
+      <p>10–15 hrs of support. Great for trials, busy seasons, or diaspora errands. Trial week available at the low-end rate.</p>
+    </div>
+    <div class="adhoc-card fade-up">
+      <h3>Single Project</h3>
+      <div class="price-amount kes-price">Ksh 3,000</div>
+      <div class="price-amount usd-price" style="display:none">$23</div>
+      <div class="price-period kes-price">– Ksh 15,000 flat fee</div>
+      <div class="price-period usd-price" style="display:none">– $115 flat fee</div>
+      <p>Fixed-fee for one-off tasks: document prep, client check-in batch, errand runs, and more.</p>
+    </div>
+  </div>
 
   /* hidden panels */
   .pricing-panel { display: none; }
