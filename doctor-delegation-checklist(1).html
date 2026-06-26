@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor's Delegation Checklist — Awino Virtual Support</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #F7F4F1; color: #1C1C1C; min-height: 100vh; padding: 2rem 1rem; }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .cl-header { background: #D35400; border-radius: 14px; padding: 2rem 1.75rem 1.75rem; margin-bottom: 1.25rem; }
+  .cl-header .brand { font-size: 11px; letter-spacing: 0.08em; color: #F5CBA7; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .cl-header h1 { color: #fff; font-size: 22px; font-weight: 600; margin-bottom: 0.4rem; }
+  .cl-header p { color: #fde8d8; font-size: 13.5px; line-height: 1.5; }
+
+  .counter-bar { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #f0e0d0; border-radius: 10px; padding: 12px 16px; margin-bottom: 1.25rem; }
+  .counter-bar .label { font-size: 13.5px; color: #666; }
+  .counter-bar .num { font-size: 20px; font-weight: 600; color: #D35400; }
+
+  .section-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #999; text-transform: uppercase; margin: 1.25rem 0 0.5rem 2px; }
+
+  .cl-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 14px; background: #fff; border: 1px solid #ece4dc; border-radius: 9px; margin-bottom: 6px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .cl-item:hover { border-color: #D35400; }
+  .cl-item.checked { background: #FDF3EC; border-color: #D35400; }
+  .cl-item input[type=checkbox] { margin-top: 2px; accent-color: #D35400; width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+  .cl-item label { font-size: 14px; color: #1C1C1C; cursor: pointer; line-height: 1.5; }
+  .cl-item.checked label { color: #D35400; }
+
+  .cta-block { background: #D35400; border-radius: 14px; padding: 1.5rem 1.75rem; text-align: center; margin-top: 1.5rem; display: none; }
+  .cta-block p { color: #fde8d8; font-size: 14px; margin-bottom: 1rem; line-height: 1.5; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #D35400; font-size: 14px; font-weight: 600; padding: 11px 22px; border-radius: 99px; text-decoration: none; transition: background 0.15s; }
+  .cta-btn:hover { background: #fde8d8; }
+  .cta-btn svg { flex-shrink: 0; }
+
+  .footer { text-align: center; margin-top: 2rem; padding-bottom: 1rem; }
+  .footer p { font-size: 12px; color: #aaa; }
+  .footer a { color: #D35400; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cl-header">
+    <div class="brand">Awino Virtual Support</div>
+    <h1>Doctor's Delegation Checklist</h1>
+    <p>Tasks you're probably handling yourself — that you don't have to.<br>Tick anything that takes time away from your patients or your rest.</p>
+  </div>
+
+  <div class="counter-bar">
+    <span class="label">Tasks ticked</span>
+    <span class="num" id="count">0 / 20</span>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="cta-block" id="cta">
+    <p id="cta-msg"></p>
+    <a class="cta-btn" id="wa-link" href="#" target="_blank" rel="noopener noreferrer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10c0 5 6 5 6 0"/></svg>
+      Chat with Isabell on WhatsApp
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>This checklist was prepared by <a href="mailto:awinovirtualsupport@gmail.com">Awino Virtual Support</a> — Nairobi, Kenya.</p>
+  </div>
+
+</div>
+<script>
+const DATA = [
+  { section: "Scheduling & calendar", items: [
+    "Booking or rescheduling personal appointments",
+    "Coordinating meetings outside of work hours",
+    "Managing reminders for non-clinical commitments",
+    "Following up on confirmed bookings or RSVPs",
+  ]},
+  { section: "Communication & follow-up", items: [
+    "Responding to non-urgent personal emails",
+    "Chasing service providers, contractors, or suppliers",
+    "Following up on deliveries, orders, or repairs",
+    "Sending thank-you notes or routine correspondence",
+  ]},
+  { section: "Travel & logistics", items: [
+    "Researching flights, hotels, or transport options",
+    "Booking travel and preparing itineraries",
+    "Coordinating airport transfers or local logistics",
+    "Managing travel documentation and packing reminders",
+  ]},
+  { section: "Personal admin", items: [
+    "Tracking bills, subscriptions, or renewals",
+    "Researching service providers (schools, clinics, contractors)",
+    "Handling returns, complaints, or follow-ups with vendors",
+    "Organising documents or filing personal paperwork",
+  ]},
+  { section: "Day-to-day errands", items: [
+    "Coordinating pick-ups, deliveries, or collections",
+    "Liaising with household staff or service teams",
+    "Running errands that require someone present in Nairobi",
+    "Keeping track of ongoing personal tasks and to-dos",
+  ]},
+];
+
+const WA_NUMBER = "254715512701";
+const sectionsEl = document.getElementById("sections");
+const countEl = document.getElementById("count");
+const ctaEl = document.getElementById("cta");
+const ctaMsg = document.getElementById("cta-msg");
+const waLink = document.getElementById("wa-link");
+const total = DATA.reduce((a, s) => a + s.items.length, 0);
+
+let idCounter = 0;
+DATA.forEach(s => {
+  const lbl = document.createElement("div");
+  lbl.className = "section-label";
+  lbl.textContent = s.section;
+  sectionsEl.appendChild(lbl);
+
+  s.items.forEach(item => {
+    const id = "cb" + idCounter++;
+    const row = document.createElement("div");
+    row.className = "cl-item";
+    row.innerHTML = '<input type="checkbox" id="' + id + '"><label for="' + id + '">' + item + '</label>';
+    const cb = row.querySelector("input");
+    row.addEventListener("click", e => {
+      if (e.target !== cb) cb.checked = !cb.checked;
+      row.classList.toggle("checked", cb.checked);
+      update();
+    });
+    cb.addEventListener("change", () => {
+      row.classList.toggle("checked", cb.checked);
+      update();
+    });
+    sectionsEl.appendChild(row);
+  });
+});
+
+function update() {
+  const ticked = document.querySelectorAll(".cl-item.checked").length;
+  countEl.textContent = ticked + " / " + total;
+  if (ticked >= 3) {
+    ctaEl.style.display = "block";
+    ctaMsg.textContent = ticked >= 8
+      ? "You ticked " + ticked + " tasks — that's a lot to carry on your own. Let's talk."
+      : "You ticked " + ticked + " tasks — a VA could free up real time for you.";
+    const tickedItems = Array.from(document.querySelectorAll(".cl-item.checked label"))
+      .map(l => l.textContent).join(", ");
+    const msg = encodeURIComponent("Hi Isabell, I just went through your delegation checklist and ticked " + ticked + " tasks I could use help with: " + tickedItems + ". I'd love to know more about your support packages.");
+    waLink.href = "https://wa.me/" + WA_NUMBER + "?text=" + msg;
+  } else {
+    ctaEl.style.display = "none";
+  }
+}
+</script>
+</body>
+</html>
