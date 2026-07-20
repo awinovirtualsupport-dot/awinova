@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Actually On Your Plate?</title>
+<style>
+  :root {
+    --orange: #C6531C;
+    --orange-soft: #E8A374;
+    --black: #1A1A1A;
+    --cream: #F7EFE3;
+    --cream-deep: #F0E4D3;
+    --grey: #6E6964;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--black);
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--cream);
+  }
+  .eyebrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(32px, 6vw, 42px);
+    line-height: 1.15;
+    margin: 0 0 14px 0;
+    color: var(--black);
+  }
+  .sub {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: var(--grey);
+    margin-bottom: 34px;
+    line-height: 1.5;
+  }
+  .sub strong { color: var(--black); }
+
+  .route {
+    position: relative;
+    padding-left: 44px;
+  }
+  .route::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 14px;
+    bottom: 14px;
+    width: 0;
+    border-left: 3px dotted var(--orange-soft);
+  }
+  .item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .dot {
+    position: absolute;
+    left: -44px;
+    top: 16px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 3px solid var(--orange);
+    background: var(--cream);
+    flex-shrink: 0;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .item.checked .dot {
+    background: var(--orange);
+    transform: scale(1.05);
+  }
+  .item.checked .dot::after {
+    content: "✓";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .item span.label {
+    font-size: 17px;
+    line-height: 1.4;
+    padding-top: 1px;
+    color: var(--black);
+    transition: color 0.15s ease;
+  }
+  .item.checked span.label {
+    color: var(--orange);
+  }
+  input[type=checkbox] { display: none; }
+
+  .divider {
+    border: none;
+    border-top: 1px dotted var(--orange-soft);
+    margin: 30px 0 26px 0;
+  }
+
+  .cta-line {
+    font-size: 22px;
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+
+  .progress {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  button#sendBtn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 6px;
+    border: none;
+    background: var(--cream-deep);
+    color: var(--grey);
+    cursor: not-allowed;
+    transition: background 0.2s ease, color 0.2s ease;
+    letter-spacing: 0.3px;
+  }
+  button#sendBtn.active {
+    background: var(--orange);
+    color: white;
+    cursor: pointer;
+  }
+  button#sendBtn.active:hover {
+    background: #a94517;
+  }
+
+  .brand {
+    margin-top: 26px;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Free checklist</div>
+    <h1>What's actually on your plate?</h1>
+    <div class="sub">Tick what's true for you this week. No plan needed, <strong>come see me behind the tent</strong> when you're done.</div>
+
+    <div class="route" id="route">
+      <label class="item" data-label="Errands piling up (post office, dry cleaning, pharmacy, parcels)">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">Errands piling up: post office, dry cleaning, pharmacy, parcels</span>
+      </label>
+      <label class="item" data-label="Bank or government office queues I keep postponing">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">Bank or government office queues you keep postponing</span>
+      </label>
+      <label class="item" data-label="Groceries and house restocking">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">Groceries and house restocking</span>
+      </label>
+      <label class="item" data-label="A family member or property that needs checking on">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">A family member or property that needs checking on</span>
+      </label>
+      <label class="item" data-label="Documents that need typing, formatting, or printing">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">Documents that need typing, formatting, or printing</span>
+      </label>
+      <label class="item" data-label="A trip or event that needs planning or on-the-day support">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">A trip or event that needs planning or on-the-day support</span>
+      </label>
+      <label class="item" data-label="Something urgent that just came up">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">Something urgent that just came up</span>
+      </label>
+      <label class="item" data-label="Not sure yet, just overwhelmed">
+        <input type="checkbox">
+        <span class="dot"></span>
+        <span class="label">You're not sure yet, just overwhelmed</span>
+      </label>
+    </div>
+
+    <hr class="divider">
+
+    <div class="progress" id="progress">0 of 8 ticked</div>
+    <button id="sendBtn">Send my list on WhatsApp</button>
+
+    <div class="brand">Isabell Awino</div>
+  </div>
+
+<script>
+  // Replace with your WhatsApp Business number in international format, no + or spaces, e.g. "254712345678"
+  const WHATSAPP_NUMBER = "254715512701";
+
+  const items = document.querySelectorAll('.item');
+  const progressEl = document.getElementById('progress');
+  const sendBtn = document.getElementById('sendBtn');
+
+  function update() {
+    const checked = document.querySelectorAll('.item.checked');
+    progressEl.textContent = checked.length + ' of ' + items.length + ' ticked';
+    if (checked.length > 0) {
+      sendBtn.classList.add('active');
+    } else {
+      sendBtn.classList.remove('active');
+    }
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      item.classList.toggle('checked');
+      const cb = item.querySelector('input[type=checkbox]');
+      cb.checked = item.classList.contains('checked');
+      update();
+    });
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const checked = document.querySelectorAll('.item.checked');
+    if (checked.length === 0) return;
+    const list = Array.from(checked).map(i => "- " + i.getAttribute('data-label')).join('\n');
+    const message = "Hi Isabell, here's what's on my plate this week:\n\n" + list + "\n\nCan we talk about what you can take off my hands?";
+    const base = WHATSAPP_NUMBER ? ("https://wa.me/" + WHATSAPP_NUMBER) : "https://wa.me/";
+    window.open(base + "?text=" + encodeURIComponent(message), "_blank");
+  });
+</script>
+</body>
+</html>
