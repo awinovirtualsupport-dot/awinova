@@ -1,101 +1,753 @@
-AVS · Isabell Awino
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AVS · Isabell Awino — Personal Assistant & Concierge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --burnt-orange: #C4500A;
+    --orange-mid: #D96B22;
+    --yellow: #F5C842;
+    --cream: #FBF5EC;
+    --black: #0D0D0D;
+    --white: #FFFFFF;
+    --text-body: #2A2218;
+    --text-muted: #7A6A55;
+    --card-bg: #FFFFFF;
+    --border: rgba(196,80,10,0.15);
+  }
 
-Professional Personal Assistant & Concierge Services
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-Welcome to the official repository for AVS (Awino Virtual Support). This repository hosts the landing page for a premium, Nairobi-based personal assistant service catering to local professionals and the Kenyan diaspora.
+  html { scroll-behavior: smooth; }
 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
 
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw;
+    background: rgba(251,245,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.4rem;
+    color: var(--burnt-orange); letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--black); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-body);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--burnt-orange); }
+  .nav-cta {
+    background: var(--burnt-orange); color: var(--white);
+    border: none; border-radius: 50px;
+    padding: 10px 22px; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--orange-mid); transform: translateY(-1px); }
 
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    display: flex; align-items: center;
+    padding: 130px 6vw 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-blob {
+    position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.18; pointer-events: none;
+  }
+  .blob-1 { width: 520px; height: 520px; background: var(--burnt-orange); top: -100px; right: -100px; }
+  .blob-2 { width: 380px; height: 380px; background: var(--yellow); bottom: 0; left: -80px; }
 
-🌟 About the Service
+  .hero-inner {
+    display: grid; grid-template-columns: 190px 1fr; gap: 40px; align-items: center;
+    max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .hero-photo-slot {
+    width: 100%; aspect-ratio: 1/1; border-radius: 50%;
+    background: repeating-linear-gradient(135deg, rgba(196,80,10,0.08), rgba(196,80,10,0.08) 12px, rgba(196,80,10,0.03) 12px, rgba(196,80,10,0.03) 24px);
+    border: 3px solid var(--burnt-orange);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 16px;
+  }
+  .hero-photo-slot span {
+    font-size: 0.72rem; color: var(--text-muted); font-weight: 600;
+    letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .hero-text { text-align: left; }
+  .hero-tag {
+    display: inline-block;
+    background: transparent; color: var(--burnt-orange);
+    border: 1.5px solid var(--burnt-orange);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 4px;
+    margin-bottom: 24px; width: fit-content;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.12; color: var(--black);
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    color: var(--burnt-orange); font-style: italic;
+    text-decoration: underline; text-decoration-thickness: 3px;
+    text-underline-offset: 6px; text-decoration-color: var(--yellow);
+  }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300;
+    color: var(--text-muted); max-width: 520px;
+    line-height: 1.75;
+  }
+  .scroll-cue {
+    margin-top: 40px; font-size: 0.95rem; color: var(--burnt-orange);
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: 0.06em; text-transform: uppercase; font-weight: 800;
+  }
+  .scroll-cue span { font-size: 1.4rem; font-weight: 900; animation: bounce 1.8s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
-AVS provides reliable, discreet, and outcome-focused support. Founded by Isabell Awino, a professional with over a decade of experience in operations and communications, AVS bridges the gap for those who need high-quality assistance without the overhead of a full-time hire.
+  /* ── FORK SECTION ── */
+  .fork-section { position: relative; background: var(--white); padding: 0 !important; }
+  .fork-intro { text-align: center; padding: 70px 6vw 0; }
+  .fork-tag {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--burnt-orange); margin-bottom: 12px;
+    border-bottom: 2px solid var(--burnt-orange); display: inline-block; padding-bottom: 4px;
+  }
+  .fork-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 900;
+    color: var(--black); max-width: 640px; margin: 0 auto 12px;
+  }
+  .fork-lede {
+    font-size: 1rem; color: var(--text-muted); max-width: 520px; margin: 0 auto;
+  }
 
-Key Features:
+  .fork-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding: 60px 6vw 90px;
+    gap: 0;
+  }
+  .fork-divider {
+    position: absolute; top: 60px; bottom: 90px; left: 50%;
+    width: 2px; background: var(--border);
+    transform: translateX(-1px);
+  }
+  .fork-divider::before, .fork-divider::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; border-radius: 50%; background: var(--burnt-orange);
+  }
+  .fork-divider::before { top: -5px; }
+  .fork-divider::after { bottom: -5px; }
+  .fork-or {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    background: var(--black); color: var(--yellow);
+    font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic;
+    font-size: 1.1rem; width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18); z-index: 2;
+  }
 
-•
-Nairobi-Based: Deep local knowledge of institutions and systems.
+  .fork-side { padding: 40px 40px; display: flex; flex-direction: column; border-radius: 20px; }
+  .fork-side.left {
+    align-items: flex-end; text-align: right; margin-right: 8px;
+    background: rgba(196,80,10,0.05); border: 1.5px solid rgba(196,80,10,0.35);
+    border-right: 6px solid var(--burnt-orange);
+  }
+  .fork-side.right {
+    align-items: flex-start; text-align: left; margin-left: 8px;
+    background: var(--burnt-orange); border: 1.5px solid var(--burnt-orange);
+    border-left: 6px solid var(--black);
+    box-shadow: 0 20px 50px rgba(196,80,10,0.25);
+  }
 
-•
-Transparency: 100% updates via photo/video for all physical errands.
+  .fork-icon { font-size: 2.2rem; margin-bottom: 18px; }
+  .fork-side-title {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--black);
+    margin-bottom: 10px; padding-bottom: 10px;
+  }
+  .fork-side.left .fork-side-title { border-bottom: 3px solid var(--burnt-orange); }
+  .fork-side.right .fork-side-title { color: var(--white); border-bottom: 3px solid var(--yellow); }
+  .fork-side-sub {
+    font-size: 0.96rem; font-weight: 600; color: var(--text-body); max-width: 340px;
+    margin-bottom: 28px; line-height: 1.6;
+  }
+  .fork-side.right .fork-side-sub { color: rgba(255,255,255,0.95); }
+  .fork-list { list-style: none; display: flex; flex-direction: column; gap: 14px; max-width: 360px; margin-bottom: 32px; }
+  .fork-side.left .fork-list { align-items: flex-end; }
+  .fork-side.right .fork-list { align-items: flex-start; }
+  .fork-list li {
+    font-size: 0.95rem; font-weight: 700; color: var(--text-body); display: flex; gap: 8px; align-items: flex-start;
+  }
+  .fork-side.left .fork-list li { flex-direction: row-reverse; }
+  .fork-side.right .fork-list li { color: var(--white); }
+  .fork-list li::before { content: "•"; color: var(--burnt-orange); font-weight: 900; }
+  .fork-side.right .fork-list li::before { color: var(--yellow); }
 
-•
-Global Reach: Specialized support for Kenyans in the UK, US, Canada, and the Middle East.
+  .fork-btn {
+    background: var(--burnt-orange); color: var(--white);
+    padding: 15px 34px; border-radius: 50px; font-size: 0.95rem;
+    font-weight: 700; text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(196,80,10,0.3);
+    white-space: nowrap;
+  }
+  .fork-btn:hover { background: var(--black); transform: translateY(-2px); box-shadow: 0 8px 26px rgba(0,0,0,0.25); }
+  .fork-side.right .fork-btn, .fork-btn.biz {
+    background: var(--white); color: var(--burnt-orange);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .fork-side.right .fork-btn:hover, .fork-btn.biz:hover { background: var(--black); color: var(--yellow); }
 
+  /* ── MOBILE: CHOOSE YOUR FIGHTER ── */
+  .fighter-select { display: none; }
 
+  @media (max-width: 860px) {
+    .fork-wrap { display: none; }
 
+    .fighter-select {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+      padding: 40px 6vw 70px;
+    }
+    .fighter-card {
+      border-radius: 20px; padding: 32px 24px; text-align: center;
+      text-decoration: none; display: block;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .fighter-card.personal {
+      background: rgba(196,80,10,0.05); border: 1.5px solid rgba(196,80,10,0.3);
+      border-bottom: 6px solid var(--burnt-orange);
+    }
+    .fighter-card.business {
+      background: var(--burnt-orange); border: 1.5px solid var(--burnt-orange);
+      border-bottom: 6px solid var(--black);
+      box-shadow: 0 16px 40px rgba(196,80,10,0.28);
+    }
+    .fighter-card:active { transform: scale(0.98); }
+    .fighter-card.personal:hover { box-shadow: 0 12px 32px rgba(196,80,10,0.16); }
+    .fighter-card.business:hover { box-shadow: 0 16px 40px rgba(196,80,10,0.4); }
+    .fighter-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .fighter-title {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 1.35rem; color: var(--black); margin-bottom: 8px;
+    }
+    .fighter-card.business .fighter-title { color: var(--white); }
+    .fighter-tagline { font-size: 0.92rem; font-weight: 600; color: var(--text-body); margin-bottom: 18px; }
+    .fighter-card.business .fighter-tagline { color: rgba(255,255,255,0.95); }
+    .fighter-cta {
+      display: inline-block; padding: 11px 26px; border-radius: 50px; font-size: 0.85rem; font-weight: 700;
+    }
+    .fighter-card.personal .fighter-cta { background: var(--burnt-orange); color: var(--white); }
+    .fighter-card.business .fighter-cta { background: var(--white); color: var(--burnt-orange); }
 
-🛠️ Service Packages
+    /* Full detail sections, mobile-only, reached by tapping a fighter card */
+    .path-detail { display: block; padding: 60px 6vw 70px; }
+    .path-detail.personal { background: var(--white); }
+    .path-detail.business { background: var(--burnt-orange); }
+    .path-detail-icon { font-size: 2rem; margin-bottom: 14px; }
+    .path-detail-title {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 1.7rem; color: var(--black); margin-bottom: 10px;
+      padding-bottom: 10px; display: inline-block;
+    }
+    .path-detail.personal .path-detail-title { border-bottom: 3px solid var(--burnt-orange); }
+    .path-detail.business .path-detail-title { color: var(--white); border-bottom: 3px solid var(--yellow); }
+    .path-detail-sub { font-size: 0.95rem; font-weight: 600; color: var(--text-body); margin-bottom: 26px; line-height: 1.6; }
+    .path-detail.business .path-detail-sub { color: rgba(255,255,255,0.95); }
+    .path-detail-list { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 30px; }
+    .path-detail-list li { font-size: 0.94rem; font-weight: 700; color: var(--text-body); display: flex; gap: 8px; }
+    .path-detail.business .path-detail-list li { color: var(--white); }
+    .path-detail-list li::before { content: "•"; color: var(--burnt-orange); font-weight: 900; }
+    .path-detail.business .path-detail-list li::before { color: var(--yellow); }
+    .back-link { display: inline-block; font-size: 0.82rem; color: var(--burnt-orange); font-weight: 700; text-decoration: none; margin-bottom: 18px; }
+    .path-detail.business .back-link { color: var(--white); }
+  }
 
-1.
-Basic Errands: Grocery shopping, parcel handling, bill payments, and airport coordination.
+  /* Full detail sections stay hidden on desktop; the split already shows everything */
+  @media (min-width: 861px) {
+    .fighter-select, .path-detail { display: none; }
+  }
 
-2.
-Professional Concierge: Document filing, bank follow-ups, and clinic/court paperwork.
+  /* ── SECTION WRAPPER ── */
+  section { padding: 90px 6vw; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--burnt-orange);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;
+    color: var(--black); line-height: 1.15; margin-bottom: 16px;
+  }
+  .section-intro {
+    font-size: 1.05rem; color: var(--text-muted);
+    max-width: 580px; line-height: 1.75; margin-bottom: 52px;
+  }
 
-3.
-Diaspora & Family Care: Relative check-ins, tenant management, and care packages.
+  /* ── MEET ISABELL ── */
+  .meet-section { background: var(--white); }
+  .meet-inner { display: grid; grid-template-columns: 360px 1fr; gap: 64px; align-items: center; }
+  .meet-photo-wrap { position: relative; display: inline-block; width: 100%; }
+  .meet-photo-img {
+    width: 100%; height: auto; display: block;
+    border-radius: 24px;
+    object-fit: cover; aspect-ratio: 4/5;
+  }
+  .meet-photo-badge {
+    position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+    background: var(--burnt-orange); color: var(--white);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 10px 20px; border-radius: 50px;
+    white-space: nowrap; box-shadow: 0 4px 16px rgba(196,80,10,0.3);
+  }
+  .meet-body { font-size: 1rem; color: var(--text-muted); line-height: 1.75; }
+  .meet-skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .skill-tag {
+    background: var(--cream); border: 1px solid var(--border);
+    color: var(--text-body); font-size: 0.82rem; font-weight: 600;
+    padding: 6px 14px; border-radius: 50px;
+  }
 
-4.
-Event & On-Site Support: Booth setup, registration management, and sales representation.
+  /* ── SERVICES ── */
+  .services-section { background: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+  .service-package {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-package:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(196,80,10,0.1); }
+  .package-icon { font-size: 2.5rem; margin-bottom: 20px; }
+  .package-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; margin-bottom: 12px; color: var(--black); }
+  .package-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; }
+  .package-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .package-list li { font-size: 0.9rem; color: var(--text-body); display: flex; gap: 10px; align-items: flex-start; }
+  .package-list li::before { content: "•"; color: var(--burnt-orange); font-weight: 900; }
+  .package-price { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); font-weight: 700; color: var(--burnt-orange); }
 
-5.
-Document Typing: Manual conversion of physical or handwritten documents to digital files.
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--black); color: var(--white); }
+  .how-section .section-tag { color: var(--yellow); }
+  .how-section .section-title { color: var(--white); }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-top: 40px; }
+  .step-card { position: relative; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--yellow); opacity: 0.3; line-height: 1; margin-bottom: 10px; }
+  .step-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  .step-desc { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
 
+  /* ── PRICING ── */
+  .pricing-section { background: var(--white); }
+  .pricing-note {
+    background: var(--yellow); color: var(--black);
+    border-radius: 14px; padding: 24px;
+    font-size: 0.95rem; font-weight: 500; margin-bottom: 40px;
+    line-height: 1.6; border-left: 6px solid var(--burnt-orange);
+  }
+  .pricing-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .pricing-table th, .pricing-table td { text-align: left; padding: 16px; border-bottom: 1px solid var(--border); }
+  .pricing-table th { font-weight: 700; color: var(--burnt-orange); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; }
+  .pricing-table tr:last-child td { border-bottom: none; }
 
+  /* ── GOOD TO KNOW ── */
+  .good-to-know {
+    margin-top: 60px;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 40px;
+  }
+  .gtk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+  .gtk-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+  .gtk-item p { font-size: 0.9rem; color: var(--text-muted); }
 
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--burnt-orange);
+    text-align: center; padding: 100px 6vw;
+    position: relative; overflow: hidden;
+  }
+  .cta-blob {
+    position: absolute; border-radius: 50%; opacity: 0.15; pointer-events: none;
+    background: var(--yellow);
+  }
+  .cta-blob-1 { width: 400px; height: 400px; top: -100px; left: -60px; }
+  .cta-blob-2 { width: 300px; height: 300px; bottom: -80px; right: -40px; }
+  .cta-section .section-tag { color: var(--yellow); text-align: center; } 
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900;
+    color: var(--white); line-height: 1.15; margin-bottom: 16px;
+  }
+  .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 520px; margin: 0 auto 40px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-cta-primary {
+    background: var(--white); color: var(--burnt-orange);
+    padding: 16px 40px; border-radius: 50px; font-size: 1rem;
+    font-weight: 700; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  .btn-cta-primary:hover { background: var(--yellow); transform: translateY(-2px); }
+  .btn-cta-secondary {
+    background: transparent; color: var(--white);
+    padding: 14px 36px; border-radius: 50px; font-size: 1rem;
+    font-weight: 600; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.6);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-cta-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 
-📈 Rates & Pricing
+  .contact-row {
+    display: flex; gap: 32px; justify-content: center; margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+  .contact-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+  .contact-value { font-size: 1rem; color: var(--white); font-weight: 500; }
 
-•
-Hourly (Ad-hoc): From KSh 1,000/hour
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 28px 6vw; font-size: 0.82rem;
+  }
+  footer span { color: var(--burnt-orange); }
 
-•
-Half-Day: From KSh 4,000
+  /* ── MOBILE ── */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-photo-slot { max-width: 150px; margin: 0 auto; }
+    .hero-text { text-align: center; }
+    .hero-subtitle { margin: 0 auto; }
+    .scroll-cue { justify-content: center; }
+    .meet-inner { grid-template-columns: 1fr; gap: 48px; }
+    .meet-photo-wrap { max-width: 320px; margin: 0 auto; }
+    section { padding: 70px 5vw; }
+    .cta-section { padding: 72px 5vw; }
+  }
 
-•
-Full-Day: From KSh 7,000
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
 
-•
-Custom quotes available for waiting time, urgency, and complex tasks.
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AVS<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get In Touch</a>
+</nav>
 
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-blob blob-1"></div>
+  <div class="hero-bg-blob blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-photo-slot">
+      <span>Photo of Isabell goes here</span>
+    </div>
+    <div class="hero-text">
+      <div class="hero-tag">On the ground in Nairobi &amp; beyond</div>
+      <h1 class="hero-title">Overwhelmed? <em>Let me take that off your plate.</em></h1>
+      <p class="hero-subtitle">
+        Whether it's personal errands piling up or business admin falling through the cracks,
+        I step in as your trusted hands on the ground, in Nairobi, across Kenya, or from wherever you are in the world.
+      </p>
+      <div class="scroll-cue">Which one's you? <span>↓</span></div>
+    </div>
+  </div>
+</section>
 
+<!-- MEET ISABELL -->
+<section class="meet-section" id="about">
+  <div class="meet-inner">
+    <div class="meet-photo-wrap fade-up">
+      <img src="https://i.imgur.com/2H4MYDH.jpeg" alt="Isabell Awino" class="meet-photo-img"/>
+      <div class="meet-photo-badge">Your Personal Assistant</div>
+    </div>
+    <div class="meet-content fade-up">
+      <div class="section-tag">Meet Isabell</div>
+      <h2 class="section-title">The person behind the inbox, the errands, and the calm.</h2>
+      <p class="meet-body">I'm Lesley Isabell Awino — a Nairobi-based personal assistant with years of experience across operations, communications, customer service experience, and event coordination. I founded AVS to give busy professionals and Kenyan diaspora clients the reliable, on-the-ground support they deserve.</p>
+      <p class="meet-body" style="margin-top:14px;">I hold a BA in Mass Communication (Public Relations) from JKUAT, and I've worked across corporate, government, and startup environments — so I understand how to handle diverse, fast-moving situations with discretion and care.</p>
+      <div class="meet-skills">
+        <span class="skill-tag">Ops & Admin</span>
+        <span class="skill-tag">Bilingual (EN / SW)</span>
+        <span class="skill-tag">Nairobi-Based</span>
+        <span class="skill-tag">Remote-Ready</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- SERVICES: CHOOSE YOUR FIGHTER FORK -->
+<section class="fork-section" id="services">
+  <div class="fork-intro">
+    <div class="fork-tag">Choose Your Path</div>
+    <h2 class="fork-heading">Two kinds of overwhelm. One person who sorts them both.</h2>
+    <p class="fork-lede">Pick the side that sounds like you, wherever you are, in Kenya or abroad.</p>
+  </div>
 
-🚀 How to Use This Repo
+  <div class="fork-wrap">
+    <div class="fork-divider"></div>
+    <div class="fork-or">or</div>
 
-This repository is configured for GitHub Pages. The live landing page can be accessed at:
-https://awinovirtualsupport-dot.github.io/awinova/
+    <div class="fork-side left">
+      <div class="fork-icon">🏡</div>
+      <h3 class="fork-side-title">Personal Overwhelm</h3>
+      <p class="fork-side-sub">For diaspora families and anyone far from Nairobi who needs a trusted person on the ground.</p>
+      <ul class="fork-list">
+        <li>Passport and visa application support</li>
+        <li>Appointment booking and document organization</li>
+        <li>Follow-ups on share transfers and banking paperwork</li>
+        <li>Buying items on your behalf, verified before shipping</li>
+        <li>Shipping through your preferred courier</li>
+        <li>Parcel collection and delivery in Nairobi</li>
+        <li>Meet-and-greet or short-visit errands</li>
+        <li>Office and institution follow-ups</li>
+        <li>Vehicle registration and related office follow-ups</li>
+      </ul>
+      <a href="https://wa.me/254715512701?text=Hi%20Isabell%2C%20I%20need%20help%20with%20a%20personal%20errand." class="fork-btn">WhatsApp: Personal Help</a>
+    </div>
 
-File Structure:
+    <div class="fork-side right">
+      <div class="fork-icon">💼</div>
+      <h3 class="fork-side-title">Business Overwhelm</h3>
+      <p class="fork-side-sub">For business owners who need admin, scheduling, content, and event support handled well.</p>
+      <ul class="fork-list">
+        <li>Virtual class moderation</li>
+        <li>Document conversion and file organization</li>
+        <li>Calendar and appointment scheduling</li>
+        <li>Client communication and follow-up</li>
+        <li>Content strategy and planning support</li>
+        <li>Event registration, ticketing, and booth sales support</li>
+        <li>Email marketing and newsletter support</li>
+        <li>Webinar and virtual event logistics</li>
+        <li>Research support</li>
+        <li>Social media posting support</li>
+        <li>Basic invoice and payment follow-up</li>
+      </ul>
+      <a href="https://wa.me/254715512701?text=Hi%20Isabell%2C%20I%20need%20help%20with%20business%20support." class="fork-btn">WhatsApp: Business Help</a>
+    </div>
+  </div>
 
-•
-index.html: The main landing page (HTML/CSS/JS ).
+  <!-- MOBILE ONLY: choose your fighter -->
+  <div class="fighter-select">
+    <a href="#path-personal" class="fighter-card personal">
+      <div class="fighter-icon">🏡</div>
+      <h3 class="fighter-title">Personal Overwhelm</h3>
+      <p class="fighter-tagline">Errands, diaspora support, ground help in Nairobi and beyond.</p>
+      <span class="fighter-cta">This Is Me</span>
+    </a>
+    <a href="#path-business" class="fighter-card business">
+      <div class="fighter-icon">💼</div>
+      <h3 class="fighter-title">Business Overwhelm</h3>
+      <p class="fighter-tagline">Admin, scheduling, content, and event support for your business.</p>
+      <span class="fighter-cta">This Is Me</span>
+    </a>
+  </div>
+</section>
 
-•
-README.md: This documentation file.
+<!-- MOBILE ONLY: full personal path, reached after tapping the card above -->
+<section class="path-detail personal" id="path-personal">
+  <a href="#services" class="back-link">← Back to both paths</a>
+  <div class="path-detail-icon">🏡</div>
+  <h2 class="path-detail-title">Personal Overwhelm</h2>
+  <p class="path-detail-sub">For diaspora families and anyone far from Nairobi who needs a trusted person on the ground.</p>
+  <ul class="path-detail-list">
+    <li>Passport and visa application support</li>
+    <li>Appointment booking and document organization</li>
+    <li>Follow-ups on share transfers and banking paperwork</li>
+    <li>Buying items on your behalf, verified before shipping</li>
+    <li>Shipping through your preferred courier</li>
+    <li>Parcel collection and delivery in Nairobi</li>
+    <li>Meet-and-greet or short-visit errands</li>
+    <li>Office and institution follow-ups</li>
+    <li>Vehicle registration and related office follow-ups</li>
+  </ul>
+  <a href="https://wa.me/254715512701?text=Hi%20Isabell%2C%20I%20need%20help%20with%20a%20personal%20errand." class="fork-btn">WhatsApp: Personal Help</a>
+</section>
 
-•
-*-checklist.html: Specialized delegation resources for various industries.
+<!-- MOBILE ONLY: full business path, reached after tapping the card above -->
+<section class="path-detail business" id="path-business">
+  <a href="#services" class="back-link">← Back to both paths</a>
+  <div class="path-detail-icon">💼</div>
+  <h2 class="path-detail-title">Business Overwhelm</h2>
+  <p class="path-detail-sub">For business owners who need admin, scheduling, content, and event support handled well.</p>
+  <ul class="path-detail-list">
+    <li>Virtual class moderation</li>
+    <li>Document conversion and file organization</li>
+    <li>Calendar and appointment scheduling</li>
+    <li>Client communication and follow-up</li>
+    <li>Content strategy and planning support</li>
+    <li>Event registration, ticketing, and booth sales support</li>
+    <li>Email marketing and newsletter support</li>
+    <li>Webinar and virtual event logistics</li>
+    <li>Research support</li>
+    <li>Social media posting support</li>
+    <li>Basic invoice and payment follow-up</li>
+  </ul>
+  <a href="https://wa.me/254715512701?text=Hi%20Isabell%2C%20I%20need%20help%20with%20business%20support." class="fork-btn biz">WhatsApp: Business Help</a>
+</section>
 
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how-it-works">
+  <div class="section-tag">The Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <div class="how-grid">
+    <div class="step-card fade-up">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Reach Out</h3>
+      <p class="step-desc">Contact me via WhatsApp or Email with your task details.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Get a Quote</h3>
+      <p class="step-desc">I'll provide a custom quote based on distance, time, and complexity.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Task Execution</h3>
+      <p class="step-desc">I undertake the task, providing photo/video updates along the way.</p>
+    </div>
+    <div class="step-card fade-up">
+      <div class="step-num">04</div>
+      <h3 class="step-title">Completion</h3>
+      <p class="step-desc">Task completed and confirmed. You get your time back!</p>
+    </div>
+  </div>
+</section>
 
+<!-- PRICING TABLE -->
+<section class="pricing-section" id="pricing">
+  <div class="section-tag">Rates</div>
+  <h2 class="section-title fade-up">What it costs to get it done.</h2>
 
+  <div class="pricing-note fade-up">
+    <strong>Note:</strong> Prices below are per outcome, what you actually get done, not per hour. "From" means the final quote may shift depending on distance, urgency, or complexity, but you're always paying for a result, not a clock.
+  </div>
 
-📞 Contact Isabell
+  <h3 class="section-title" style="font-size: 1.4rem; margin: 48px 0 20px;">Personal &amp; Diaspora Outcomes</h3>
+  <table class="pricing-table fade-up">
+    <thead>
+      <tr>
+        <th>Outcome</th>
+        <th>From (KSh)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A single errand or pickup/drop-off — Nairobi</td><td>800</td></tr>
+      <tr><td>A single errand or pickup/drop-off — Upcountry</td><td>1,000</td></tr>
+      <tr><td>A single errand or pickup/drop-off — Diaspora</td><td>1,500</td></tr>
+      <tr><td>A document filed and its status confirmed</td><td>1,500</td></tr>
+      <tr><td>An appointment booked and confirmed</td><td>1,200</td></tr>
+      <tr><td>An item bought and verified — under KSh 5,000</td><td>1,000 (item cost separate)</td></tr>
+      <tr><td>An item bought and verified — KSh 5,000–20,000</td><td>3,500 (item cost separate)</td></tr>
+      <tr><td>An item bought and verified — over KSh 20,000</td><td>10% of item value, min 6,000</td></tr>
+      <tr><td>A passport or visa application, fully supported</td><td>13,000</td></tr>
+      <tr><td>A family check-in — simple visit</td><td>2,500</td></tr>
+      <tr><td>A family check-in — extended visit</td><td>4,500</td></tr>
+      <tr><td>On-site event support, per half-day</td><td>5,000</td></tr>
+      <tr><td>A document typed (short / medium / long)</td><td>600 / 1,500 / 3,000</td></tr>
+    </tbody>
+  </table>
 
-Ready to reclaim your time?
+  <h3 class="section-title" style="font-size: 1.4rem; margin: 48px 0 20px;">Business Overwhelm</h3>
+  <div class="pricing-note fade-up" style="background: var(--cream); color: var(--text-body); border-left-color: var(--black);">
+    Business support is quoted per project or as a monthly retainer, depending on scope. Reach out with what you need and you'll get a clear quote before anything starts.
+  </div>
 
-•
-WhatsApp: +254 715 512 701
+  <div class="good-to-know fade-up">
+    <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 24px;">Good to know before you book</h3>
+    <div class="gtk-grid">
+      <div class="gtk-item">
+        <h4>Payment Modes</h4>
+        <p>Two modes of payment available: Pay in full prior to task, or pay 50% before and 50% after completion.</p>
+      </div>
+      <div class="gtk-item">
+        <h4>Ad-hoc / Custom Requests</h4>
+        <p>For work that doesn't fit an outcome above, an hourly rate is available on request, quoted before you commit.</p>
+      </div>
+      <div class="gtk-item">
+        <h4>Pricing Policy</h4>
+        <p>All out-of-home errands include both labour and transport costs. Item costs for purchases are paid separately.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-•
-Email: awinoisabell0@gmail.com
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-blob cta-blob-1"></div>
+  <div class="cta-blob cta-blob-2"></div>
+  <div style="position: relative; z-index: 1;">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="cta-title">Let's find the right fit<br/>for you.</h2>
+    <p class="cta-sub">Reach out today for a custom quote or to discuss your ongoing needs.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/254715512701" class="btn-cta-primary">WhatsApp Me Now</a>
+      <a href="mailto:awinoisabell0@gmail.com" class="btn-cta-secondary">Send an Email</a>
+    </div>
+    <div class="contact-row">
+      <div class="contact-item">
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+254 715 512 701</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">awinoisabell0@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-value">Nairobi, Kenya</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-•
-Location: Nairobi, Kenya
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>AVS</span> · Isabell Awino · Personal Assistant · Nairobi, Kenya</p>
+</footer>
 
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 
-
-
-© 2025 AVS · Isabell Awino · All Rights Reserved.
-
+</body>
+</html>
