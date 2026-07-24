@@ -475,7 +475,7 @@
   <div class="hero-bg-blob blob-2"></div>
   <div class="hero-inner">
     <div class="hero-photo-slot">
-      <span>https://imgur.com/a/lesley-sunlight-JU0BAfT</span>
+      <span>https://i.imgur.com/dlFof7Z.jpeg</span>
     </div>
     <div class="hero-text">
       <div class="hero-tag">On the ground in Nairobi &amp; beyond</div>
