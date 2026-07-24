@@ -603,9 +603,9 @@
 <section class="meet-section" id="about">
   <div class="meet-inner">
     <div class="meet-photo-wrap fade-up">
-      <img src="https://i.imgur.com/dlFof7Z.jpeg" alt="Isabell Awino" style="width:100%; height:100%; object-fit:cover; object-position: center top; border-radius:50%;"/>
-      <div class="meet-photo-badge">Your Personal Assistant</div>
-    </div>
+  <img src="https://i.imgur.com/2H4MYDH.jpeg" alt="Isabell Awino" class="meet-photo-img"/>
+  <div class="meet-photo-badge">Your Personal Assistant</div>
+</div>
     <div class="meet-content fade-up">
       <div class="section-tag">Meet Isabell</div>
       <h2 class="section-title">The person behind the inbox, the errands, and the calm.</h2>
