@@ -696,6 +696,10 @@
         <p>Two modes of payment available: Pay in full prior to task, or pay 50% before and 50% after completion.</p>
       </div>
       <div class="gtk-item">
+  <h4>Trial Periods</h4>
+  <p>New to working with me? We can start with a single project or a short trial before committing to an ongoing retainer, so you know it's the right fit first.</p>
+</div>
+      <div class="gtk-item">
         <h4>Ad-hoc / Custom Requests</h4>
         <p>For work that doesn't fit an outcome above, an hourly rate is available on request, quoted before you commit.</p>
       </div>
